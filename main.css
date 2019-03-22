@@ -1,0 +1,28 @@
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.control-panel {
+    padding: 10px;
+}
+
+.control-panel form {
+    margin: 0;
+}
+
+.event-listing {
+    overflow-y: scroll;
+
+    flex-basis: 50%;
+}
+
+.input-area {
+    background-color: cornflowerblue;
+
+    flex-basis: 50%;
+}

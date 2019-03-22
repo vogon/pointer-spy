@@ -1,8 +1,118 @@
 <html>
 <head>
     <title>pointer spy</title>
+    <link rel="stylesheet" href="main.css" />
+
+    <script type="application/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="application/javascript" src="https://www.jsviews.com/download/jsrender.js"></script>
 </head>
 <body>
-    
+    <div class="control-panel">
+        <form>
+            <label for="mouse-button">mouse events</label>
+            <input type="checkbox" name="mouse-button">
+
+            <label for="mouse-move">mouse enter/leave/move/over/out</label>
+            <input type="checkbox" name="mouse-move">
+
+            <label for="touch-events">touch events</label>
+            <input type="checkbox" name="touch-events">
+
+            <label for="pointer-button">pointer events</label>
+            <input type="checkbox" name="pointer-button">
+
+            <label for="pointer-move">pointer enter/leave/move/over/out</label>
+            <input type="checkbox" name="pointer-move">
+        </form>
+    </div>
+    <div class="event-listing">
+
+    </div>
+    <div class="input-area">
+        &nbsp;
+    </div>
+
+    <script id="mouse-event-template" type="text/x-jsrender">
+        <p>
+            <em>{{:type}}</em>
+            button: {{:button}} buttons: {{:buttons}}
+            client: ({{:clientX}}, {{:clientY}})
+            screen: ({{:screenX}}, {{:screenY}})
+            dr: ({{:movementX}}, {{:movementY}})
+            which: {{:which}}
+            {{if altKey}}alt{{/if}}
+            {{if ctrlKey}}ctrl{{/if}}
+            {{if metaKey}}meta{{/if}}
+            {{if shiftKey}}shift{{/if}}
+        </p>
+    </script>
+
+    <script id="wheel-event-template" type="text/x-jsrender">
+        <p>
+            <em>{{:type}}</em>
+            button: {{:button}} buttons: {{:buttons}}
+            client: ({{:clientX}}, {{:clientY}})
+            screen: ({{:screenX}}, {{:screenY}})
+            dr: ({{:movementX}}, {{:movementY}})
+            which: {{:which}}
+            {{if altKey}}alt{{/if}}
+            {{if ctrlKey}}ctrl{{/if}}
+            {{if metaKey}}meta{{/if}}
+            {{if shiftKey}}shift{{/if}}
+            dwheel: ({{:deltaX}}, {{:deltaY}}, {{:deltaZ}})
+            dmode: {{:deltaMode}}
+        </p>
+    </script>
+
+    <script id="touch-event-template" type="text/x-jsrender">
+        <p>
+            <em>{{:type}}</em>
+            touches: [{{for ~touchListToArray(touches) tmpl="#touch-template" /}}]
+            changed: [{{for ~touchListToArray(changedTouches)}}{{:identifier}}{{/for}}]
+            target: [{{for ~touchListToArray(targetTouches)}}{{:identifier}}{{/for}}]
+            rotation: {{:rotation}}
+            scale: {{:scale}}
+            {{if altKey}}alt{{/if}}
+            {{if ctrlKey}}ctrl{{/if}}
+            {{if metaKey}}meta{{/if}}
+            {{if shiftKey}}shift{{/if}}
+        </p>
+    </script>
+
+    <script id="touch-template" type="text/x-jsrender">
+        {
+        identifier: {{:identifier}}
+        screen: ({{:screenX}}, {{:screenY}})
+        client: ({{:clientX}}, {{:clientY}})
+        page: ({{:pageX}}, {{:pageY}})
+        radius: ({{:radiusX}}, {{:radiusY}})
+        rotationAngle: {{:rotationAngle}}
+        force: {{:force}}
+        }
+    </script>
+
+    <script id="pointer-event-template" type="text/x-jsrender">
+        <p>
+            <em>{{:type}}</em>
+            button: {{:button}} buttons: {{:buttons}}
+            client: ({{:clientX}}, {{:clientY}})
+            screen: ({{:screenX}}, {{:screenY}})
+            dr: ({{:movementX}}, {{:movementY}})
+            which: {{:which}}
+            pid: {{:pointerId}}
+            geom: {{:width}} x {{:height}}
+            pressure: {{:pressure}}
+            tiltX: {{:tiltX}}
+            tiltY: {{:tiltY}}
+            pointerType: {{:pointerType}}
+            isPrimary: {{:isPrimary}}
+            {{if altKey}}alt{{/if}}
+            {{if ctrlKey}}ctrl{{/if}}
+            {{if metaKey}}meta{{/if}}
+            {{if shiftKey}}shift{{/if}}
+        </p>
+    </script>
+
+    <script type="application/javascript" src="main.js"></script>
 </body>
 </html>
